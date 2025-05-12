@@ -54,7 +54,10 @@ public class EmployeesController {
             @ApiResponse(responseCode = "400", description = "Error de validación general")
     })
     @PostMapping("/batch")
-    public ResponseEntity<BatchCreateEmployeeResponse> createBatch(@RequestBody @Valid List<CreateEmployeeRequest> requestList) {
+    public ResponseEntity<BatchCreateEmployeeResponse> createBatch(
+            @RequestBody @Valid BatchCreateEmployeeRequest requestWrapper) {
+
+        List<CreateEmployeeRequest> requestList = requestWrapper.getEmployees();
         Map<String, Object> result = createEmployeeBatchUseCase.execute(requestList);
 
         List<Employee> created = (List<Employee>) result.get("created");
