@@ -1,0 +1,167 @@
+{
+	"info": {
+		"_postman_id": "3368210a-2a45-4b19-bd77-8a3c07209a85",
+		"name": "Prueba Java",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "7873696"
+	},
+	"item": [
+		{
+			"name": "Create Employee",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"firstName\": \"Ana\",\r\n    \"middleName\": \"Laura\",\r\n    \"lastName\": \"Hernández\",\r\n    \"secondLastName\": \"Gómez\",\r\n    \"age\": 8,\r\n    \"gender\": \"F\",\r\n    \"birthDate\": \"1996-02-15\",\r\n    \"position\": \"Analyst\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/employees",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"employees"
+					]
+				},
+				"description": "Generated from cURL: curl -X POST http://localhost:8080/employees \\\r\n  -H \"Content-Type: application/json\" \\\r\n  -d '{\r\n    \"firstName\": \"Ana\",\r\n    \"middleName\": \"Laura\",\r\n    \"lastName\": \"Hernández\",\r\n    \"secondLastName\": \"Gómez\",\r\n    \"age\": 28,\r\n    \"gender\": \"F\",\r\n    \"birthDate\": \"1996-02-15\",\r\n    \"position\": \"Analyst\"\r\n}'\r\n"
+			},
+			"response": []
+		},
+		{
+			"name": "Get All Employees",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/employees",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"employees"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update Employee",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"firstName\": \"Ana\",\r\n    \"middleName\": \"Luisa\",\r\n    \"lastName\": \"Hernández\",\r\n    \"secondLastName\": \"Gómez\",\r\n    \"age\": 29,\r\n    \"gender\": \"F\",\r\n    \"birthDate\": \"1995-02-15\",\r\n    \"position\": \"Senior Analyst\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/employees/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"employees",
+						"1"
+					]
+				},
+				"description": "Generated from cURL: curl -X PUT http://localhost:8080/employees/1 \\\r\n  -H \"Content-Type: application/json\" \\\r\n  -d '{\r\n    \"firstName\": \"Ana\",\r\n    \"middleName\": \"Luisa\",\r\n    \"lastName\": \"Hernández\",\r\n    \"secondLastName\": \"Gómez\",\r\n    \"age\": 29,\r\n    \"gender\": \"F\",\r\n    \"birthDate\": \"1995-02-15\",\r\n    \"position\": \"Senior Analyst\"\r\n}'\r\n"
+			},
+			"response": []
+		},
+		{
+			"name": "Delete Employee",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"firstName\": \"Ana\",\r\n    \"middleName\": \"Luisa\",\r\n    \"lastName\": \"Hernández\",\r\n    \"secondLastName\": \"Gómez\",\r\n    \"age\": 29,\r\n    \"gender\": \"F\",\r\n    \"birthDate\": \"1995-02-15\",\r\n    \"position\": \"Senior Analyst\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/employees/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"employees",
+						"1"
+					]
+				},
+				"description": "Generated from cURL: curl -X PUT http://localhost:8080/employees/1 \\\r\n  -H \"Content-Type: application/json\" \\\r\n  -d '{\r\n    \"firstName\": \"Ana\",\r\n    \"middleName\": \"Luisa\",\r\n    \"lastName\": \"Hernández\",\r\n    \"secondLastName\": \"Gómez\",\r\n    \"age\": 29,\r\n    \"gender\": \"F\",\r\n    \"birthDate\": \"1995-02-15\",\r\n    \"position\": \"Senior Analyst\"\r\n}'\r\n"
+			},
+			"response": []
+		},
+		{
+			"name": "Batch Employees",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"firstName\": \"Ana\",\r\n    \"middleName\": \"Laura\",\r\n    \"lastName\": \"Hernández\",\r\n    \"secondLastName\": \"Gómez\",\r\n    \"age\": 8,\r\n    \"gender\": \"F\",\r\n    \"birthDate\": \"1996-02-15\",\r\n    \"position\": \"Analyst\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/employees",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"employees"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
