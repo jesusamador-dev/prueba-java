@@ -7,6 +7,7 @@ import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
+import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.server.ResponseStatusException;
 
 import java.util.HashMap;
@@ -51,7 +52,10 @@ public class GlobalExceptionHandler {
     }
 
     @ExceptionHandler(Exception.class)
-    public ResponseEntity<?> handleGenericException(Exception ex) {
+    public ResponseEntity<?> handleGenericException(Exception ex, WebRequest request) throws Exception {
+        if (request.getDescription(false).contains("/v3/api-docs")) {
+            throw ex;
+        }
         Map<String, Object> response = new HashMap<>();
         response.put("status", 500);
         response.put("error", "Internal Server Error");

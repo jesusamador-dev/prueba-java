@@ -3,6 +3,9 @@ package com.prueba.tecnica.employeeservice.presentation.api.rest.controllers;
 import com.prueba.tecnica.employeeservice.domain.entities.Employee;
 import com.prueba.tecnica.employeeservice.presentation.api.rest.dto.*;
 import com.prueba.tecnica.employeeservice.application.usecases.*;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -23,6 +26,8 @@ public class EmployeesController {
     private final UpdateEmployeeUseCase updateEmployeeUseCase;
     private final DeleteEmployeeUseCase deleteEmployeeUseCase;
 
+    @Operation(summary = "Listar todos los empleados")
+    @ApiResponse(responseCode = "200", description = "Lista obtenida exitosamente")
     @GetMapping
     public ResponseEntity<List<EmployeeResponse>> getAll() {
         List<Employee> employees = getAllEmployeesUseCase.execute();
@@ -32,12 +37,22 @@ public class EmployeesController {
         return ResponseEntity.ok(response);
     }
 
+    @Operation(summary = "Crear un nuevo empleado")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Empleado creado exitosamente"),
+            @ApiResponse(responseCode = "400", description = "Error de validación en la petición")
+    })
     @PostMapping
     public ResponseEntity<EmployeeResponse> create(@RequestBody @Valid CreateEmployeeRequest request) {
         Employee created = createEmployeeUseCase.execute(request);
         return ResponseEntity.ok(toResponse(created));
     }
 
+    @Operation(summary = "Crear empleados en lote (máximo 10)")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "207", description = "Procesamiento parcial: algunos empleados fueron rechazados"),
+            @ApiResponse(responseCode = "400", description = "Error de validación general")
+    })
     @PostMapping("/batch")
     public ResponseEntity<BatchCreateEmployeeResponse> createBatch(@RequestBody @Valid List<CreateEmployeeRequest> requestList) {
         Map<String, Object> result = createEmployeeBatchUseCase.execute(requestList);
@@ -66,6 +81,12 @@ public class EmployeesController {
         return ResponseEntity.status(207).body(response);
     }
 
+    @Operation(summary = "Actualizar un empleado por ID")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Empleado actualizado exitosamente"),
+            @ApiResponse(responseCode = "400", description = "Datos de entrada inválidos"),
+            @ApiResponse(responseCode = "404", description = "Empleado no encontrado")
+    })
     @PutMapping("/{id}")
     public ResponseEntity<EmployeeResponse> update(@PathVariable Long id,
                                                    @RequestBody @Valid UpdateEmployeeRequest request) {
@@ -73,6 +94,11 @@ public class EmployeesController {
         return ResponseEntity.ok(toResponse(updated));
     }
 
+    @Operation(summary = "Eliminar un empleado por ID")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "204", description = "Empleado eliminado exitosamente"),
+            @ApiResponse(responseCode = "404", description = "Empleado no encontrado")
+    })
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> delete(@PathVariable Long id) {
         deleteEmployeeUseCase.execute(id);

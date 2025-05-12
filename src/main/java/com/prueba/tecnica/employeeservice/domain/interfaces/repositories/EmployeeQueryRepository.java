@@ -7,5 +7,6 @@ import java.util.Optional;
 
 public interface EmployeeQueryRepository {
     Optional<Employee> findById(Long id);
+
     List<Employee> findAll();
 }
